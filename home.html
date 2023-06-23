@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./home.css" />
+  </head>
+  <body>
+    <div class="all">
+      <div class="page1 page">
+        <div calss="locationpage">
+          <img
+            style="width: 20px"
+            class="location"
+            src="./src/images/location.png"
+            alt=""
+          />
+          <span>重庆</span>
+        </div>
+        <img class="bg02" src="./src/images/bg02.png" alt="" />
+        <img class="bg03" src="./src/images/bg03.png" alt="" />
+        <img class="bg04" src="./src/images/bg04.png" alt="" />
+      </div>
+      <div class="page2 page"></div>
+      <div class="page3 page"></div>
+      <div class="page4 page">
+        <div class="chart"></div>
+      </div>
+      <div class="page5 page"></div>
+      <div class="footer"></div>
+    </div>
+    <div class="searchPage">
+      <div class="top">
+        <input placeholder="搜索地区" type="text" />
+        <button>确定</button>
+      </div>
+      <p>热门城市</p>
+      <div class="city"></div>
+    </div>
+  </body>
+  <script type="module" src="./home.js"></script>
+  <script src="node_modules/echarts/dist/echarts.min.js"></script>
+  <script>
+    (function () {
+      //图表
+      let myChart = echarts.init(document.querySelector(".chart"));
+      var option = {
+        grid: {
+          show: true,
+          backgroundColor: "transparent",
+          opacity: 0.3,
+          borderWidth: "0",
+          top: "50",
+          bottom: "0",
+        },
+        /* tooltip: {
+        trigger: "axis",
+      }, */
+        legend: {
+          show: false,
+        },
+        xAxis: [
+          // 星期
+          {
+            type: "category",
+            boundaryGap: false,
+            position: "top",
+            offset: 20,
+            zlevel: 100,
+            axisLine: {
+              show: false,
+            },
+            axisTick: {
+              show: false,
+            },
+            axisLabel: {
+              interval: 0,
+              formatter: ["{a|{value}}"].join("\n"),
+              rich: {
+                a: {
+                  // color: 'white',
+                  fontSize: 14,
+                },
+              },
+            },
+            nameTextStyle: {
+              fontWeight: "bold",
+              fontSize: 19,
+            },
+            data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+          },
+        ],
+        yAxis: {
+          type: "value",
+          show: false,
+          axisLabel: {
+            formatter: "{value} °C",
+            color: "white",
+          },
+        },
+        series: [
+          {
+            name: "最高气温",
+            type: "line",
+            data: ["16.3", "16.2", "17.6", "14.2", "17.6", "15.7", "14.3"],
+            symbol: "emptyCircle",
+            symbolSize: 10,
+            showSymbol: true,
+            smooth: true,
+            itemStyle: {
+              normal: {
+                color: "#C95843",
+              },
+            },
+            label: {
+              show: true,
+              position: "top",
+              // color: 'white',
+              formatter: "{c} °C",
+            },
+            lineStyle: {
+              width: 1,
+              // color: 'white'
+            },
+            areaStyle: {
+              opacity: 1,
+              color: "transparent",
+            },
+          },
+          {
+            name: "最低气温",
+            type: "line",
+            data: ["13.4", "12.8", "13.5", "12.5", "12.4", "13.2", "13"],
+            symbol: "emptyCircle",
+            symbolSize: 10,
+            showSymbol: true,
+            smooth: true,
+            itemStyle: {
+              normal: {
+                color: "blue",
+              },
+            },
+            label: {
+              show: true,
+              position: "bottom",
+              // color: 'white',
+              formatter: "{c} °C",
+            },
+            lineStyle: {
+              width: 1,
+              // color: 'white'
+            },
+            areaStyle: {
+              opacity: 1,
+              color: "transparent",
+            },
+          },
+        ],
+      };
+      myChart.setOption(option);
+      window.addEventListener("resize", function () {
+        myChart.resize();
+      });
+    })();
+  </script>
+</html>
